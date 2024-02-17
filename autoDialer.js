@@ -1,13 +1,13 @@
 // ==UserScript==
-// @name         Your Script Name
+// @name         autoDialer
 // @namespace    http://caden-humphrey.github.io/autodialer
 // @version      2024-02-17
-// @description  A description of your script
+// @description  Auto Answer and Place Calls in Genesys Cloud
 // @author       Caden H
 // @match        https://apps.usw2.pure.cloud/directory/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
 // @grant        none
-// @updateURL    https://caden-humphrey.github.io/caden-humphrey.github.io/autoDialer.js
+// @updateURL    https://caden-humphrey.github.io/autoDialer.js
 // ==/UserScript==
 (function() {
     'use strict';
