@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         autoDialer
-// @namespace    http://caden-humphrey.github.io/autodialer
+// @namespace    http://caden-humphrey.github.io/autodialer.js
 // @version      2024-02-16
 // @description  Auto Answer and Place Calls in Genesys Cloud
 // @author       Caden H
