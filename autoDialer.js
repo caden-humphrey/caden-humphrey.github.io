@@ -4,7 +4,7 @@
 // @version      2024-02-16
 // @description  Auto Answer and Place Calls in Genesys Cloud
 // @author       Caden H
-// @match        https://apps.usw2.pure.cloud/directory/*
+// @match        https://apps.usw2.pure.cloud/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
 // @grant        none
 // @updateURL    https://caden-humphrey.github.io/autoDialer.js
