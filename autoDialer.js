@@ -2,7 +2,7 @@
 // @name         autoDialer
 // @namespace    http://tampermonkey.net/
 // @version      2024-02-14
-// @description  try to take over the world!
+// @description  auto accepts calls from the preview dialer!
 // @author       Caden H
 // @match        https://apps.usw2.pure.cloud/crm/index.html?*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
