@@ -289,32 +289,34 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
 
     // duplicate message closer
     (function duplicateMessageCloser() {
-        // Select the node that will be observed for mutations
-        let targetNode = document.querySelector('div.forceVisualMessageQueue');
+        if (document.querySelector('div.forceVisualMessageQueue')) {
+            // Select the node that will be observed for mutations
+            let targetNode = document.querySelector('div.forceVisualMessageQueue');
 
-        // Options for the observer (which mutations to observe)
-        let config = { childList: true, subtree: true };
+            // Options for the observer (which mutations to observe)
+            let config = { childList: true, subtree: true };
 
-        // Callback function to execute when mutations are observed
-        let callback = function(mutationsList, observer) {
-            for(let mutation of mutationsList) {
-                if (mutation.type === 'childList') {
-                    let element = document.querySelector('button[class="slds-button slds-button_icon toastClose slds-notify__close slds-button--icon-inverse slds-button_icon-bare"]');
-                    if (element) {
-                        console.log('CADEN LOG: toastMessage duplicate notice');
-                        setTimeout(function() {
-                            element.click();
-                        }, 3000); // Delay of 3 seconds
+            // Callback function to execute when mutations are observed
+            let callback = function(mutationsList, observer) {
+                for(let mutation of mutationsList) {
+                    if (mutation.type === 'childList') {
+                        let element = document.querySelector('button[class="slds-button slds-button_icon toastClose slds-notify__close slds-button--icon-inverse slds-button_icon-bare"]');
+                        if (element) {
+                            console.log('CADEN LOG: toastMessage duplicate notice');
+                            setTimeout(function() {
+                                element.click();
+                            }, 3000); // Delay of 3 seconds
+                        }
                     }
                 }
-            }
-        };
+            };
 
-        // Create an observer instance linked to the callback function
-        let observer = new MutationObserver(callback);
+            // Create an observer instance linked to the callback function
+            let observer = new MutationObserver(callback);
 
-        // Start observing the target node for configured mutations
-        observer.observe(targetNode, config);
+            // Start observing the target node for configured mutations
+            observer.observe(targetNode, config);
+        }
 
     })();
 }
