@@ -290,6 +290,7 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
     // duplicate message closer
     (function duplicateMessageCloser() {
         if (document.querySelector('div.forceVisualMessageQueue')) {
+            console.log('CADEN LOG: duplicateMessageCloser: MutationObserver started.')
             // Select the node that will be observed for mutations
             let targetNode = document.querySelector('div.forceVisualMessageQueue');
 
