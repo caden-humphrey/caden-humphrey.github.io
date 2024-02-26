@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AAAB TEAM Auto Dialer & Auto Dispositioner
 // @namespace    http://tampermonkey.net/
-// @version      2024-02-26 2:09PM
+// @version      2024-02-26.1
 // @description  Auto Dialer & Auto Dispositioner
 // @author       Caden H
 // @match        https://thumbtack.lightning.force.com
@@ -286,6 +286,4 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
             console.error('CADEN LOG: salesforce evenetListener - =keyboardShortcut to run window.SendMessage -', error);
         }
     });
-
-
 }
