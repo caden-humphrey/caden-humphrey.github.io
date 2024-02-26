@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Auto Dialer & Auto Dispositioner 2/26/2024
+// @name         AAAB TEAM Auto Dialer & Auto Dispositioner
 // @namespace    http://tampermonkey.net/
-// @version      2024-02-22
+// @version      2024-02-26
 // @description  Auto Dialer & Auto Dispositioner
 // @author       Caden H
 // @match        https://thumbtack.lightning.force.com
@@ -9,9 +9,12 @@
 // @match        https://apps.usw2.pure.cloud/crm/index.html?*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
 // @grant        none
+// @updateURL    https://caden-humphrey.github.io/autoDialer.js
+// @downloadURL  https://caden-humphrey.github.io/autoDialer.js
 // ==/UserScript==
 
 if (window.location.hostname === 'apps.usw2.pure.cloud') {
+    // preview dialer auto answer function
     (function previewAutoAnswer() {
         'use strict';
         var elements = new Proxy({}, {get: function(target, name) {return variables()[name];}});
@@ -111,7 +114,7 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
 
     })();
 
-// call dispositioner
+    // call dispositioner
     window.dispoCall = function(dispoSelector = 'No answer from Pro') {
         try {
             console.log('CADEN LOG: Genesys: dispoCall Function started');
@@ -187,7 +190,7 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
         }
     }
 
-// event listener for messages from salesforce
+    // event listener for messages from salesforce
     window.addEventListener('message', function(event) { // Add event listener for messages from the parent window
 
             // Check the origin of the message
@@ -198,7 +201,7 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
             }
     });
 
-// queue toggler
+    // queue toggler
     window.toggleQueue = function() {
         try {
             var availableStatus = document.querySelector('div.simplebar-content-wrapper li.status-item.available');
@@ -216,7 +219,7 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
         }
     }
 
-
+    // event listener for keyboard shortcut
     window.addEventListener('keydown', function(event) { // Add event listener for 'No Answer' disposition Keyboard shortcut
         if (event.key === '=') {
             try {
@@ -228,6 +231,7 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
     });
     
 } else {
+    // close contact
     window.closeContact = function() {
         try {
             console.log('CADEN LOG: Salesforce: closeContact Function started');
@@ -246,7 +250,7 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
         }
     }
     
-
+    // send message to genesys
     window.sendMessage = function () {
         'use strict';
         try {
@@ -258,7 +262,7 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
         }
     }
 
-
+    // event listener for messages from genesys
     window.addEventListener('message', function(event) { // Add event listener for messages from the parent window
             // Check the origin of the message
             if (event.origin !== 'https://apps.usw2.pure.cloud') return;
@@ -272,7 +276,7 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
 
     });
 
-
+    // event listener for keyboard shortcut
     window.addEventListener('keydown', function(event) { // Add event listener for 'No Answer' disposition Keyboard shortcut
         try {
             if (event.key === '=') {
