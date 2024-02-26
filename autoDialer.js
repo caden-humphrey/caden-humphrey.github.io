@@ -287,9 +287,8 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
         }
     });
 
-        // duplicate message closer
+    // duplicate message closer
     (function duplicateMessageCloser() {
-        console.log('CADEN LOG: duplicate message closer STARTED')
         // Select the node that will be observed for mutations
         let targetNode = document.querySelector('div.forceVisualMessageQueue');
 
@@ -303,7 +302,9 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
                     let element = document.querySelector('button[class="slds-button slds-button_icon toastClose slds-notify__close slds-button--icon-inverse slds-button_icon-bare"]');
                     if (element) {
                         console.log('CADEN LOG: toastMessage duplicate notice');
-                        element.click();
+                        setTimeout(function() {
+                            element.click();
+                        }, 3000); // Delay of 3 seconds
                     }
                 }
             }
