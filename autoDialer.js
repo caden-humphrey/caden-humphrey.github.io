@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AAAB TEAM Auto Dialer & Auto Dispositioner
 // @namespace    http://tampermonkey.net/
-// @version      2024-02-27
+// @version      2024-02-28
 // @description  Auto Dialer & Auto Dispositioner
 // @author       Caden H
 // @match        https://thumbtack.lightning.force.com
@@ -24,70 +24,65 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
 
         function variables() {
             return {
-                callState: document.querySelector('#interactionList div.center-container span.interaction-data.call-state'),
-                callBackData: document.querySelectorAll('div.callback-ui div.form-group.flex')[0],
+                interactionsData: document.querySelector('#interactionList div.simplebar-content div.interaction-selection.sel div.center-container'),
                 makeCallButton: document.querySelectorAll('div.callback-ui-wrapper div.btn-group button')[1],
                 pickUpButton: document.querySelector('gef-pickup-control[text="Pick Up"]'),
                 callControl: document.querySelector('li[data-call-control="pickup"]'),
-                page: document.body
             };
         }
 
-        // Function to pick up the call
-        function pickUpCall() {
-            try {
-                console.log('CADEN LOG: Genesys: pickUpCall function started');
-                var pickUpObserver = new MutationObserver((mutations) => {
-                    mutations.forEach((mutation) => {
-                        if (mutation.target.getAttribute('disabled') === null) {
-                            pickUpObserver.disconnect();
-                            console.log('CADEN LOG: Genesys: previewDialer observer disconnected');
-                            makeCall();
-                        }
-                    });
-                });
-                pickUpObserver.observe(elements.pickUpButton, { attributes: true, attributeOldValue: true });
-                console.log('CADEN LOG: Genesys: pickUpCall observer CONNECTED');
-            } catch (error) {
-                console.error('CADEN LOG: pickUpCall -', error);
-            }
-        }
 
         // Function to pick up the call
         async function makeCall() {
             try {
                 console.log('CADEN LOG: Genesys: makeCall function started')
-                if (elements.callBackData.innerText == '' || elements.callBackData.innerText.includes('DISCONNECTED')) {
-                    console.log('CADEN LOG: makeCall: route 1 started');
-                    await pauseForCondition(() => elements.callBackData.innerText != '' || !elements.callBackData.innerText.includes('DISCONNECTED'));
-                    console.log('CADEN LOG: makeCall: route 1 ended');
-                }
-                    if (elements.callBackData.innerText == 'CustomerALERTINGSMB English Dialer') {
+                await waitForCondition(() => elements.interactionsData.textContent != '' && !elements.interactionsData.innerText.includes('DISCONNECTED') && elements.pickUpButton.disabled === false);
+                await pauseForCondition(() => elements.interactionsData.textContent == 'CustomerALERTINGSMB English Dialer');
+                    if (elements.interactionsData.textContent == 'CustomerALERTINGSMB English Dialer') {
                         console.log('CADEN LOG: makeCall: call is previewDialer');
-                        elements.pickUpButton.click();
-                        console.log('CADEN LOG: makeCall: pickUpButton clicked');
-                        await waitForCondition(() => elements.makeCallButton.disabled === false);
-                        console.log('CADEN LOG: makeCall: makeCallButton is enabled');
-                        elements.makeCallButton.click();
-                        console.log('CADEN LOG: makeCall: makeCallButton clicked');
-                        setTimeout(() => {
-                            pickUpCall();
-                        }, 2000);
+                            elements.pickUpButton.click();
+                            console.log('CADEN LOG: makeCall: pickUpButton clicked');
+                                await waitForCondition(() => elements.makeCallButton.disabled === false);
+                                console.log('CADEN LOG: makeCall: makeCallButton is enabled');
+                                    elements.makeCallButton.click();
+                                    console.log('CADEN LOG: makeCall: makeCallButton clicked');
                     } else {
                         console.log('CADEN LOG: makeCall: call NOT previewDialer... calling pickUpCall function');
-                        setTimeout(() => {
-                            pickUpCall();
-                        }, 2000);
                     }
             } catch (error) {
-                console.error('CADEN LOG: dispoCall -', error);
+                console.error('CADEN LOG: makeCall -', error);
             }
         }
 
+
+        function observerSetUp() {
+            let targetNode = document.querySelector('#interactionList div.simplebar-content');
+            let config = { childList: true, subtree: true };
+
+            // Callback function to execute when mutations are observed
+            let callback = function(mutationsList, observer) {
+                for(let mutation of mutationsList) {
+                    if (mutation.type === 'childList') {
+                        for(let node of mutation.addedNodes) {
+                            if(node.nodeName === 'DIV') {
+                                console.log('CADEN LOG: new incoming call');
+                                makeCall();
+                            }
+                        }
+                    }
+                }
+            };
+
+            let observer = new MutationObserver(callback);
+            observer.observe(targetNode, config);
+        }
+
+
         (async function() {
-            await waitForCondition(() => elements.pickUpButton !== null && elements.pickUpButton !== undefined);
-            pickUpCall();
+            await waitForCondition(() => elements.pickUpButton !== null && document.querySelector('#interactionList div.simplebar-content') !== null && document.querySelector('#interactionList div.simplebar-content') !== undefined);
+            observerSetUp();
         })();
+
     })();
 
     // call dispositioner
