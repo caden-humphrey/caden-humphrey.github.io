@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AAAB TEAM Auto Dialer & Auto Dispositioner
 // @namespace    http://tampermonkey.net/
-// @version      2024-02-28
+// @version      2024-02-29
 // @description  Auto Dialer & Auto Dispositioner
 // @author       Caden H
 // @match        https://thumbtack.lightning.force.com
@@ -14,6 +14,7 @@
 // ==/UserScript==
 
 if (window.location.hostname === 'apps.usw2.pure.cloud') {
+
     // preview dialer auto answer function
     (function previewDialerAutoAnswer() {
 
@@ -24,65 +25,70 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
 
         function variables() {
             return {
-                interactionsData: document.querySelector('#interactionList div.simplebar-content div.interaction-selection.sel div.center-container'),
+                callState: document.querySelector('#interactionList div.center-container span.interaction-data.call-state'),
+                callBackData: document.querySelectorAll('div.callback-ui div.form-group.flex')[0],
                 makeCallButton: document.querySelectorAll('div.callback-ui-wrapper div.btn-group button')[1],
                 pickUpButton: document.querySelector('gef-pickup-control[text="Pick Up"]'),
                 callControl: document.querySelector('li[data-call-control="pickup"]'),
+                page: document.body
             };
         }
 
+        // Function to pick up the call
+        function pickUpCall() {
+            try {
+                console.log('CADEN LOG: Genesys: pickUpCall function started');
+                var pickUpObserver = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.target.getAttribute('disabled') === null) {
+                            pickUpObserver.disconnect();
+                            console.log('CADEN LOG: Genesys: previewDialer observer disconnected');
+                            makeCall();
+                        }
+                    });
+                });
+                pickUpObserver.observe(elements.pickUpButton, { attributes: true, attributeOldValue: true });
+                console.log('CADEN LOG: Genesys: pickUpCall observer CONNECTED');
+            } catch (error) {
+                console.error('CADEN LOG: pickUpCall -', error);
+            }
+        }
 
         // Function to pick up the call
         async function makeCall() {
             try {
                 console.log('CADEN LOG: Genesys: makeCall function started')
-                await waitForCondition(() => elements.interactionsData.textContent != '' && !elements.interactionsData.innerText.includes('DISCONNECTED') && elements.pickUpButton.disabled === false);
-                await pauseForCondition(() => elements.interactionsData.textContent == 'CustomerALERTINGSMB English Dialer');
-                    if (elements.interactionsData.textContent == 'CustomerALERTINGSMB English Dialer') {
+                if (elements.callBackData.innerText == '' || elements.callBackData.innerText.includes('DISCONNECTED')) {
+                    console.log('CADEN LOG: makeCall: route 1 started');
+                    await pauseForCondition(() => elements.callBackData.innerText != '' || !elements.callBackData.innerText.includes('DISCONNECTED'));
+                    console.log('CADEN LOG: makeCall: route 1 ended');
+                }
+                    if (elements.callBackData.innerText == 'CustomerALERTINGSMB English Dialer') {
                         console.log('CADEN LOG: makeCall: call is previewDialer');
-                            elements.pickUpButton.click();
-                            console.log('CADEN LOG: makeCall: pickUpButton clicked');
-                                await waitForCondition(() => elements.makeCallButton.disabled === false);
-                                console.log('CADEN LOG: makeCall: makeCallButton is enabled');
-                                    elements.makeCallButton.click();
-                                    console.log('CADEN LOG: makeCall: makeCallButton clicked');
+                        elements.pickUpButton.click();
+                        console.log('CADEN LOG: makeCall: pickUpButton clicked');
+                        await waitForCondition(() => elements.makeCallButton.disabled === false);
+                        console.log('CADEN LOG: makeCall: makeCallButton is enabled');
+                        elements.makeCallButton.click();
+                        console.log('CADEN LOG: makeCall: makeCallButton clicked');
+                        setTimeout(() => {
+                            pickUpCall();
+                        }, 2000);
                     } else {
                         console.log('CADEN LOG: makeCall: call NOT previewDialer... calling pickUpCall function');
+                        setTimeout(() => {
+                            pickUpCall();
+                        }, 2000);
                     }
             } catch (error) {
-                console.error('CADEN LOG: makeCall -', error);
+                console.error('CADEN LOG: dispoCall -', error);
             }
         }
 
-
-        function observerSetUp() {
-            let targetNode = document.querySelector('#interactionList div.simplebar-content');
-            let config = { childList: true, subtree: true };
-
-            // Callback function to execute when mutations are observed
-            let callback = function(mutationsList, observer) {
-                for(let mutation of mutationsList) {
-                    if (mutation.type === 'childList') {
-                        for(let node of mutation.addedNodes) {
-                            if(node.nodeName === 'DIV') {
-                                console.log('CADEN LOG: new incoming call');
-                                makeCall();
-                            }
-                        }
-                    }
-                }
-            };
-
-            let observer = new MutationObserver(callback);
-            observer.observe(targetNode, config);
-        }
-
-
         (async function() {
-            await waitForCondition(() => elements.pickUpButton !== null && document.querySelector('#interactionList div.simplebar-content') !== null && document.querySelector('#interactionList div.simplebar-content') !== undefined);
-            observerSetUp();
+            await waitForCondition(() => elements.pickUpButton !== null && elements.pickUpButton !== undefined);
+            pickUpCall();
         })();
-
     })();
 
     // call dispositioner
@@ -132,7 +138,7 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
                         elements.hangUpButton.shadowRoot.querySelector('button').click();
                         }
                 }
-        
+
                 window.parent.postMessage("dispo done", 'https://thumbtack.lightning.force.com');
             }
 
@@ -200,8 +206,9 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
             }
         }
     });
-    
-} else {
+
+} else if (window.top === window.self) {
+
     // close contact
     window.closeContact = function() {
         try {
@@ -220,7 +227,7 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
             console.error('CADEN LOG: newNBC -', error);
         }
     }
-    
+
     // send message to genesys
     window.sendMessage = function () {
         'use strict';
@@ -236,7 +243,7 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
     // event listener for messages from genesys
     window.addEventListener('message', function(event) { // Add event listener for messages from the parent window
             // Check the origin of the message
-            if (event.origin !== 'https://apps.usw2.pure.cloud') return;
+            if (event.origin !== 'https://apps.usw2.pure.cloud' || event.origin !== 'https://thumbtack.lightning.force.com') return;
 
             if (event.data === "equal button pressed") {
                 console.log('CADEN LOG: Salesforce: -equal button pressed- message received from Genesys');
@@ -252,6 +259,57 @@ if (window.location.hostname === 'apps.usw2.pure.cloud') {
         try {
             if (event.key === '=') {
                 window.sendMessage();
+            }
+        } catch (error) {
+            console.error('CADEN LOG: salesforce evenetListener - =keyboardShortcut to run window.SendMessage -', error);
+        }
+    });
+
+    // duplicate message closer
+    (function toastMessageCloser() {
+        let targetNode = document.querySelector('div.forceVisualMessageQueue');
+        let config = { childList: true, subtree: true };
+
+        // Callback function to execute when mutations are observed
+        let callback = function (mutationsList, observer) {
+            for (let mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    for (let node of mutation.addedNodes) {
+                        if (node.nodeName === 'DIV') {
+                            console.log('CADEN LOG: new toastMessage');
+                            setTimeout(function () {
+                                if (document.querySelector('span.toastMessage').textContent == 'It looks as if duplicates exist for this Contact. View Duplicates') {
+                                    document.querySelector('button[title="Close"].toastClose').click();
+                                    console.log('CADEN LOG: closed toastMessage');
+                                }
+                            }, 2000);
+                        }
+                    }
+                }
+            }
+        };
+
+        let observer = new MutationObserver(callback);
+        observer.observe(targetNode, config);
+    })();
+
+    (async function openGenesysPhone() {
+        console.log('CADEN LOG: openGenesysPhone started');
+        function pauseForCondition(conditionFunction, interval = 5, maxAttempts = 3000) { let attempts = 0; return new Promise((resolve, reject) => { const checkCondition = () => { if (conditionFunction()) { console.log('CADEN LOG: Condition met.'); resolve(); } else if (attempts < maxAttempts) { attempts++; setTimeout(checkCondition, interval); } else { console.log('CADEN LOG: call is NOT previewDialer... calling pickUpCall function'); resolve(false); } }; checkCondition(); }); }
+        await pauseForCondition(() => document.querySelector('div[data-component-id="opencti_softPhone"] button'));
+        setTimeout(function () {
+            document.querySelector('div[data-component-id="opencti_softPhone"] button').click();
+            console.log('CADEN LOG: genesys phone button clicked');
+        }, 2000);
+    })();
+
+} else {
+
+    // event listener for keyboard shortcut
+    window.addEventListener('keydown', function(event) { // Add event listener for 'No Answer' disposition Keyboard shortcut
+        try {
+            if (event.key === '=') {
+                window.parent.sendMessage();
             }
         } catch (error) {
             console.error('CADEN LOG: salesforce evenetListener - =keyboardShortcut to run window.SendMessage -', error);
