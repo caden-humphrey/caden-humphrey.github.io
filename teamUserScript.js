@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         New Team Function Test
 // @namespace    http://tampermonkey.net/
-// @version      2024-03-01
+// @version      2024-06-13
 // @description  Auto Dialer & Auto Dispositioner
 // @author       Caden H
 // @match        https://thumbtack.lightning.force.com
@@ -294,28 +294,28 @@ if (window.top === window.self) {
                 convertSaveFooter: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('records-form-footer.slds-docked-form-footer div'),
 
                 /* Package Fill variables */
-                packageOppName: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[name=\"Name\"]'),
-                packageAmountField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[name=\"Amount\"]'),
-                packageAmountPaidUpfrontField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[name=\"AmountPaidUpfront__c\"]'),
-                packagePromoCreditField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[name=\"PromotionalCredit__c\"]'),
-                packageTypeField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Type\"] button span'),
-                packageTypeOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Type\"] [title=\"' + typeValue + '\"]'),
-                packageNumEmployeesField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Number of Employees\"] button span'),
-                packageNumEmployeesOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Number of Employees\"] [title=\"' + numEmployeesValue + '\"]'),
-                packageNumLocationsField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Number of Locations\"] button span'),
-                packageNumLocationsOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Number of Locations\"] [title=\"' + numLocationsValue + '\"]'),
-                packageFranchiseField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Is Part of a Franchise?\"] button span'),
-                packageFranchiseOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Is Part of a Franchise?\"] [title=\"' + franchiseValue + '\"]'),
-                packagePackageField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Package\"] button span'),
-                packagePackageOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Package\"] [title=\"' + packageValue + '\"]'),
-                packagePackageLevelField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Package Level\"] button span'),
-                packagePackageLevelOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Package Level\"] [title=\"' + packageLevelvalue + '\"]'),
-                packageLeadTypeField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Lead Type\"] button span'),
-                packageLeadTypeOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Lead Type\"] [title=\"' + leadTypeValue + '\"]'),
-                packageLeadSourceField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Lead Source\"] button span'),
-                packageLeadSourceOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[field-label=\"Lead Source\"] [title=\"' + leadSourceValue + '\"]'),
-                packageBatchField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[name=\"Batch__c\"]'),
-                packageSaveBtn: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[name=\"SaveEdit\"]'),
+                packageOppName: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[name=\"Name\"]'),
+                packageAmountField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[name=\"Amount\"]'),
+                packageAmountPaidUpfrontField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[name=\"AmountPaidUpfront__c\"]'),
+                packagePromoCreditField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[name=\"PromotionalCredit__c\"]'),
+                packageTypeField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Type\"] button span'),
+                packageTypeOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Type\"] [title=\"' + typeValue + '\"]'),
+                packageNumEmployeesField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Number of Employees\"] button span'),
+                packageNumEmployeesOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Number of Employees\"] [title=\"' + numEmployeesValue + '\"]'),
+                packageNumLocationsField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Number of Locations\"] button span'),
+                packageNumLocationsOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Number of Locations\"] [title=\"' + numLocationsValue + '\"]'),
+                packageFranchiseField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Is Part of a Franchise?\"] button span'),
+                packageFranchiseOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Is Part of a Franchise?\"] [title=\"' + franchiseValue + '\"]'),
+                packagePackageField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Package\"] button span'),
+                packagePackageOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Package\"] [title=\"' + packageValue + '\"]'),
+                packagePackageLevelField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Package Level\"] button span'),
+                packagePackageLevelOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Package Level\"] [title=\"' + packageLevelvalue + '\"]'),
+                packageLeadTypeField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Lead Type\"] button span'),
+                packageLeadTypeOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Lead Type\"] [title=\"' + leadTypeValue + '\"]'),
+                packageLeadSourceField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Lead Source\"] button span'),
+                packageLeadSourceOption: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[field-label=\"Lead Source\"] [title=\"' + leadSourceValue + '\"]'),
+                packageBatchField: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[name=\"Batch__c\"]'),
+                packageSaveBtn: document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[name=\"SaveEdit\"]'),
 
             };
         };
@@ -2869,7 +2869,7 @@ button.caden.automationButton {
 
             // Edit Opportunity _______
             async function editForm() {
-                var editFormBtn = document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[title=\"Edit Opportunity Name\"]');
+                var editFormBtn = document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[title=\"Edit Opportunity Name\"]');
                 if (editFormBtn !== null) {
                     editFormBtn.click();
                     await waitForConditionPackage(() => tackUI.packageAmountField !== null);
@@ -3114,7 +3114,7 @@ button.caden.automationButton {
 
             // Edit Opportunity _______
             async function editForm() {
-                var editFormBtn = document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[title=\"Edit Opportunity Name\"]');
+                var editFormBtn = document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[title=\"Edit Opportunity Name\"]');
                 if (editFormBtn !== null) {
                     editFormBtn.click();
                     await waitForConditionPackage(() => tackUI.packageAmountField !== null);
@@ -3359,7 +3359,7 @@ button.caden.automationButton {
 
             // Edit Opportunity _______
             async function editForm() {
-                var editFormBtn = document.querySelector('[class="windowViewMode-maximized active lafPageHost"]').querySelector('[title=\"Edit Opportunity Name\"]');
+                var editFormBtn = document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[title=\"Edit Opportunity Name\"]');
                 if (editFormBtn !== null) {
                     editFormBtn.click();
                     await waitForConditionPackage(() => tackUI.packageAmountField !== null);
@@ -3914,3 +3914,4 @@ button.caden.automationButton {
     });
 
 }
+/* https://caden-humphrey.github.io/teamUserScript.js */
