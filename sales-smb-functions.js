@@ -2019,8 +2019,8 @@
                                     genUI.makeCallButton?.click();
                                     // window.parent.postMessage("newCall", 'https://thumbtack.lightning.force.com');
                                     setTimeout(() => {
-                                        if (genUI.callControl?.disabled === false) {
-                                            genUI.callControl?.click();
+                                        if (genUI.makeCallButton?.disabled === false) {
+                                            genUI.makeCallButton?.click();
                                         }
                                     }, 1000);
                                     // window.startTimer();
