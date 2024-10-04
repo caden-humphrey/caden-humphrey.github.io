@@ -47,22 +47,21 @@
                 checkCondition();
             });
         };
-        window.actionThenWaitForCondition = function (actionFunction, conditionFunction, interval = 100, maxAttempts = 100) { 
-            let attempts = 0; 
-            return new Promise((resolve, reject) => { 
-                const checkCondition = () => { 
-                    actionFunction(); 
+        window.actionThenWaitForCondition = function (actionFunction, conditionFunction, interval = 100, maxAttempts = 100) {
+            let attempts = 0;
+            return new Promise((resolve, reject) => {
+                const checkCondition = () => {
+                    actionFunction();
                     if (conditionFunction()) {
-                        
-                        resolve(); 
-                    } else if (attempts < maxAttempts) { 
-                        attempts++; setTimeout(checkCondition, interval); 
-                    } else { 
-                        reject(new Error('Condition not met within the specified time')); 
-                    } 
-                }; 
-                checkCondition(); 
-            }); 
+                        resolve();
+                    } else if (attempts < maxAttempts) {
+                        attempts++; setTimeout(checkCondition, interval);
+                    } else {
+                        reject(new Error('Condition not met within the specified time'));
+                    }
+                };
+                checkCondition();
+            });
         };
         window.createActionThenWaitForCondition = function (windowPath, interval = 250) {
             return function (conditionFunction, actionFunction) {
@@ -714,7 +713,7 @@
                     width: 50px;
                     cursor: pointer;
                 }
-                
+
                 /* Object Automation Buttons */
 
                 div.caden.automationButtonContainer.Convert {
@@ -1039,7 +1038,7 @@
         };
         window.testUI = new Proxy({}, { get: function (target, name) { return window.testUIvariables()[name]; } });
 
-        testUiElements = ['flexiComponentSlot', 'contactOutreachSummaryComponent', 'proActivationDetailComponent', 'column1', 'column2', 'column3', 'column4', 'defaultContactInfoFlexitab', 'highlightedFieldsSlot', 'contactInformationColumn1Slot', 'contactInformationColumn2Slot', 'parentAccount', 'occupation', 'firstServiceCreateTime', 'mailingAddress', 'name', 'accountName', 'adminLinkViewUser', 'thumbtackUserPk', 'occupation', 'assignedCategory', 'numberOfEmployees', 'decile', 'contactOwner', 'createdDate', 'signupDate', 'userLastActivity', 'preferredLanguage', 'CBSA', 'holdout', 'marketCompetitionDashboard', 'title', 'email', 'phone', 'preferredPhone', 'revenuePotential', 'businessType', 'lastQuoteTime', 'holdoutV1', 'holdoutSegmentationName'];
+        window.testUiElements = ['flexiComponentSlot', 'contactOutreachSummaryComponent', 'proActivationDetailComponent', 'column1', 'column2', 'column3', 'column4', 'defaultContactInfoFlexitab', 'highlightedFieldsSlot', 'contactInformationColumn1Slot', 'contactInformationColumn2Slot', 'parentAccount', 'occupation', 'firstServiceCreateTime', 'mailingAddress', 'name', 'accountName', 'adminLinkViewUser', 'thumbtackUserPk', 'occupation', 'assignedCategory', 'numberOfEmployees', 'decile', 'contactOwner', 'createdDate', 'signupDate', 'userLastActivity', 'preferredLanguage', 'CBSA', 'holdout', 'marketCompetitionDashboard', 'title', 'email', 'phone', 'preferredPhone', 'revenuePotential', 'businessType', 'lastQuoteTime', 'holdoutV1', 'holdoutSegmentationName'];
 
         window.moveFields = function () {
             testUI.column1.prepend(testUI.decile);
@@ -1505,8 +1504,8 @@
         window.fillPackage = function (Package) {
             Package();
             window.windowPathTest = window.location.pathname
-        
-        
+
+
             // Edit Opportunity _______
             async function editForm() {
                 var editFormBtn = document.querySelector('[class="windowViewMode-maximized active lafPageHost"]')?.querySelector('[title=\"Edit Opportunity Name\"]');
@@ -1515,7 +1514,7 @@
                     await window.wait(() => tackUI.packageAmountField !== null);
                 }
             }
-        
+
             async function fillAmount() {
                 await window.wait(() => tackUI.packageAmountField !== null && tackUI.packageAmountField.value !== undefined);
                 await window.wait(() =>
@@ -1526,7 +1525,7 @@
                     }
                 );
             }
-        
+
             async function fillAmountPaidUpFront() {
                 await window.wait(() => tackUI.packageAmountPaidUpfrontField !== null && tackUI.packageAmountPaidUpfrontField.value !== undefined);
                 await window.wait(() =>
@@ -1537,7 +1536,7 @@
                     }
                 );
             }
-        
+
             async function fillPromoCredit() {
                 await window.wait(() => tackUI.packagePromoCreditField !== null && tackUI.packagePromoCreditField.value !== undefined);
                 await window.wait(() =>
@@ -1548,7 +1547,7 @@
                     }
                 );
             }
-        
+
             async function fillType() {
                 try {
                     await window.wait(() => tackUI.packageTypeField !== null);
@@ -1559,13 +1558,13 @@
                                 tackUI.packageTypeField.click();
                             }
                         );
-        
+
                         tackUI.packageTypeOption.click();
                         await window.wait(() => tackUI.packageTypeField.textContent === typeValue);
                     }
                 } catch (error) { console.error('CADEN LOG: fillType -', error); }
             }
-        
+
             async function fillNumEmployees() {
                 try {
                     await window.wait(() => tackUI.packageNumEmployeesField !== null);
@@ -1576,13 +1575,13 @@
                                 tackUI.packageNumEmployeesField.click();
                             }
                         );
-        
+
                         tackUI.packageNumEmployeesOption.click();
                         await window.wait(() => tackUI.packageNumEmployeesField.textContent === numEmployeesValue);
                     }
                 } catch (error) { console.error('CADEN LOG: fillNumEmployees -', error); }
             }
-        
+
             async function fillNumLocations() {
                 try {
                     await window.wait(() => tackUI.packageNumLocationsField !== null);
@@ -1593,13 +1592,13 @@
                                 tackUI.packageNumLocationsField.click();
                             }
                         );
-        
+
                         tackUI.packageNumLocationsOption.click();
                         await window.wait(() => tackUI.packageNumLocationsField.textContent === numLocationsValue);
                     }
                 } catch (error) { console.error('CADEN LOG: fillNumLocations -', error); }
             }
-        
+
             async function fillFranchise() {
                 try {
                     await window.wait(() => tackUI.packageFranchiseField !== null);
@@ -1610,13 +1609,13 @@
                                 tackUI.packageFranchiseField.click();
                             }
                         );
-        
+
                         tackUI.packageFranchiseOption.click();
                         await window.wait(() => tackUI.packageFranchiseField.textContent === franchiseValue);
                     }
                 } catch (error) { console.error('CADEN LOG: fillFranchise -', error); }
             }
-        
+
             async function fillPackage() {
                 try {
                     await window.wait(() => tackUI.packagePackageField !== null).then(async () => {
@@ -1627,7 +1626,7 @@
                                     tackUI.packagePackageField.click();
                                 }
                             );
-        
+
                             tackUI.packagePackageOption.click();
                             await window.wait(() => tackUI.packagePackageField.textContent === packageValue);
                         }
@@ -1640,13 +1639,13 @@
                                 tackUI.packagePackageLevelField.click();
                             }
                         );
-        
+
                         tackUI.packagePackageLevelOption.click();
                         await window.wait(() => tackUI.packagePackageLevelField.textContent === packageLevelvalue);
                     }
                 } catch (error) { console.error('CADEN LOG: fillPackage -', error); }
             }
-        
+
             async function fillLeadType() {
                 try {
                     await window.wait(() => tackUI.packageLeadTypeField !== null);
@@ -1657,13 +1656,13 @@
                                 tackUI.packageLeadTypeField.click();
                             }
                         );
-        
+
                         tackUI.packageLeadTypeOption.click();
                         await window.wait(() => tackUI.packageLeadTypeField.textContent === leadTypeValue);
                     }
                 } catch (error) { console.error('CADEN LOG: fillLeadType -', error); }
             }
-        
+
             async function fillLeadSource() {
                 try {
                     await window.wait(() => tackUI.packageLeadSourceField !== null);
@@ -1674,13 +1673,13 @@
                                 tackUI.packageLeadSourceField.click();
                             }
                         );
-        
+
                         tackUI.packageLeadSourceOption.click();
                         await window.wait(() => tackUI.packageLeadSourceField.textContent === leadSourceValue);
                     }
                 } catch (error) { console.error('CADEN LOG: fillLeadSource -', error); }
             }
-        
+
             async function fillBatch() {
                 try {
                     await window.wait(() => tackUI.packageBatchField !== null);
@@ -1696,7 +1695,7 @@
                 await window.wait(() => tackUI.packageSaveBtn !== null && tackUI.packageSaveBtn.disabled === false);
                 tackUI.packageSaveBtn.click();
             }
-        
+
             (async function saveOpp() {
                 try {
                     await Promise.all([ editForm() ]);
@@ -1730,18 +1729,18 @@
                         fillBatch(),
                     ]);
 
-                    
+
                 await window.wait(() => tackUI.packageSaveBtn !== null && tackUI.packageSaveBtn.disabled === false);
                 tackUI.packageSaveBtn.click();
         */
-        
+
 
                     // window.sendToCustomOpportunity();
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth'
                     });
-        
+
                 } catch (error) {
                     console.error('CADEN LOG: saveOpp -', error);
                 }
@@ -1749,7 +1748,7 @@
         };
 
 
-
+/*
         window.cadenDialsReportRefresher = function () {
             // Select the iframe element
             var iframe = document.querySelector('iframe[title="Report Viewer"]');
@@ -1797,11 +1796,11 @@
                 }
             }, 1500);
         };
-
-        waitForCondition(() => tackUI.viewport !== null, 100, 100).then(() => {
+*/
+        waitForCondition(() => tackUI.viewport !== null, 100, 150).then(() => {
             window.insertCustomUI();
         });
-        waitForCondition(() => customUIvalues.every(value => customUI[value] !== null), 100, 100).then(() => {
+        waitForCondition(() => customUIvalues.every(value => customUI[value] !== null), 100, 150).then(() => {
             window.customUIscript();
             window.customUIautomationsFunctions();
             window.checkURL();
@@ -1811,16 +1810,16 @@
                 window.setKbsDropdownPosition();
             }, 3000);
         });
-        waitForCondition(() => tackUI.toastMessageContainerNode !== null, 100, 100).then(() => {
+        waitForCondition(() => tackUI.toastMessageContainerNode !== null, 100, 150).then(() => {
             setTimeout(() => {
                 window.toastMessageCloser();
             }, 1000);
         });
-        waitForCondition(() => tackUI.phoneButton !== null && tackUI.dockingPanel !== null, 100, 100).then(() => {
+        waitForCondition(() => tackUI.phoneButton !== null && tackUI.dockingPanel !== null, 100, 150).then(() => {
             // setTimeout(() => {window.openGenesysPhone();}, 500);
             setTimeout(() => { window.makeRoomForPhone(); }, 750);
         });
-        waitForCondition(() => tackUI.viewport !== null, 100, 100).then(() => {
+        waitForCondition(() => tackUI.viewport !== null, 100, 150).then(() => {
             window.addEventListener('message', function (event) { // Add event listener for messages from the parent window
                 // Check the origin of the message
                 if (event.origin !== 'https://apps.usw2.pure.cloud') return;
@@ -1836,9 +1835,6 @@
                 }
             });
         });
-        waitForCondition(() => document.querySelector('iframe[title="Report Viewer"]') !== null, 100, 100).then(() => {
-            window.cadenDialsReportRefresher();
-        });
 
 
 
@@ -1849,7 +1845,7 @@
         (function () {
             var newStyles = document.createElement('style');
             newStyles.innerHTML = `
-        
+
                 html#purecloudHTML.lightning,
                 html#purecloudHTML body.lightning {
                     height: 100% !important;
@@ -1858,7 +1854,7 @@
                 div[class="crm-modal call-work-ui"] gux-dropdown gux-listbox[class="wrap-up-code-dropdown"] {
                     max-height: calc(100vh - 231px) !important;
                 }
-        
+
             `;
             document.head.prepend(newStyles);
         })();
@@ -1900,7 +1896,7 @@
                 }
             });
         };
-        
+
         window.genesysVariables = function () {
             return {
                 interactionsData: document.querySelector('#interactionList div.simplebar-content div.interaction-selection.sel div.center-container'),
@@ -1912,24 +1908,24 @@
                 muteButton: document.querySelector('#statusController_test gef-mute-control'),
                 wrapUpButton: document.querySelectorAll('#interactionList div.right-btn-container i.fa.fa-user.interaction-call-work-edit')[0],
                 wrapUpList: document.querySelectorAll('gux-dropdown[placeholder="Select wrap-up code"]')[0],
-        
+
                 done: document.querySelector('button.after-call-work-done-button.btn.btn-sm.btn-primary'),
                 callBackInfo: document.querySelector('div.callback-ui div.form-group.flex'),
                 muteButton: document.querySelector('li[data-call-control="mute"] gef-mute-control')?.shadowRoot?.querySelector('button[aria-label="Mute"]'),
             };
         };
         window.genUI = new Proxy({}, { get: function (target, name) { return window.genesysVariables()[name]; } });
-        
-        
+
+
         function genesysFunctions() {
             window.answerDecision = "";
             window.parent.postMessage("cadenMessage set-phone-height", 'https://thumbtack.lightning.force.com');
-        
+
             // genesys error message closer
             function callErrorCloser() {
                 let targetNode = document.querySelector('#statusController_test div.alert-wrapper div.notification-container');
                 let config = { childList: true, subtree: true };
-        
+
                 // Callback function to execute when mutations are observed
                 let callback = function (mutationsList, observer) {
                     for (let mutation of mutationsList) {
@@ -1946,7 +1942,7 @@
                         }
                     }
                 };
-        
+
                 let genesysErrorobserver = new MutationObserver(callback);
                 genesysErrorobserver.observe(targetNode, config);
             }
@@ -1971,7 +1967,7 @@
                     }
                 }, time);
             };
-        
+
             window.cancelTimer = function () {
                 if (window.timerId) {
                     clearTimeout(window.timerId);
@@ -1984,16 +1980,16 @@
                     window.timerId1 = null;
                 }
             };
-        
+
             // previewDialer auto answer
             (function previewDialerAutoAnswer() {
-        
+
                 function waitForCondition(conditionFunction, interval = 200, maxAttempts = 100) { let attempts = 0; return new Promise((resolve, reject) => { const checkCondition = () => { if (conditionFunction()) { resolve(); } else if (attempts < maxAttempts) { attempts++; setTimeout(checkCondition, interval); } else { reject(console.log('CADEN LOG: Condition not met within the specified time')); } }; checkCondition(); }); }
                 function pauseForCondition(conditionFunction, interval = 200, maxAttempts = 100) { let attempts = 0; return new Promise((resolve, reject) => { const checkCondition = () => { if (conditionFunction()) { resolve(); } else if (attempts < maxAttempts) { attempts++; setTimeout(checkCondition, interval); } else { resolve(false); } }; checkCondition(); }); }
 /*
                 (function observerSetUp1() {
                     window.answerObserver1Config = { attributes: true, attributeFilter: ['style'] };
-        
+
                     // Callback function to execute when mutations are observed
                     window.answerObserver1Callback = function (mutationsList, observer) {
                         for (let mutation of mutationsList) {
@@ -2032,8 +2028,8 @@
                             }
                         });
                     });
-        
-        
+
+
                     /*
                         await waitForCondition(() => genUI.interactionsData.textContent != '' && !genUI.interactionsData.innerText.includes('DISCONNECTED') && genUI.pickUpButton.disabled === false);
                         await pauseForCondition(() => genUI.interactionsData.textContent == 'CustomerALERTINGSMB English Dialer');
@@ -2050,11 +2046,11 @@
                         }
                     */
                 }
-        
+
                 function observerSetUp() {
                     let targetNode = document.querySelector('#interactionList div.simplebar-content');
                     let config = { childList: true, subtree: true };
-        
+
                     // Callback function to execute when mutations are observed
                     let callback = function (mutationsList, observer) {
                         for (let mutation of mutationsList) {
@@ -2074,25 +2070,25 @@
                             }
                         }
                     };
-        
+
                     let observer = new MutationObserver(callback);
                     observer.observe(targetNode, config);
                 }
-        
+
                 (async function () {
                     await waitForCondition(() => genUI.pickUpButton !== null && document.querySelector('#interactionList div.simplebar-content') !== null && document.querySelector('#interactionList div.simplebar-content') !== undefined);
                     observerSetUp();
                     callErrorCloser();
                 })();
             })();
-        
+
             // call dispositioner
             window.dispoCall = function (dispoSelector = 'No answer from Pro') {
                 try {
                     function getgenUIByTextContent(text) { let all = Array.from(document.querySelectorAll('gux-option')); let result = all.filter(el => el.textContent.trim() == text); return result; }
                     function waitForCondition(conditionFunction, interval = 200, maxAttempts = 100) { let attempts = 0; return new Promise((resolve, reject) => { const checkCondition = () => { if (conditionFunction()) { resolve(); } else if (attempts < maxAttempts) { attempts++; setTimeout(checkCondition, interval); } else { reject(console.log('Condition not met within the specified time')); } }; checkCondition(); }); }
                     function pauseForCondition(conditionFunction, interval = 200, maxAttempts = 100) { let attempts = 0; return new Promise((resolve, reject) => { const checkCondition = () => { if (conditionFunction()) { resolve(); } else if (attempts < maxAttempts) { attempts++; setTimeout(checkCondition, interval); } else { resolve(false); } }; checkCondition(); }); }
-        
+
                     var dispo = getgenUIByTextContent(dispoSelector)[0];
                     function openInteractionList() {
                         var interactionList = document.querySelector('div.interaction-list-container');
@@ -2102,8 +2098,8 @@
                             interactionListNavigator.click();
                         }
                     }
-        
-        
+
+
                     async function setdispo() {
                         if (genUI.hangUpButton.disabled === false) {
                             genUI.hangUpButton.shadowRoot.querySelector('button').click();
@@ -2120,12 +2116,12 @@
                                 genUI.hangUpButton.shadowRoot.querySelector('button').click();
                             }
                         }
-        
+
                         window.parent.postMessage("dispo done", 'https://thumbtack.lightning.force.com');
                     }
-        
+
                     openInteractionList();
-        
+
                     if (genUI.wrapUpButton !== null && genUI.wrapUpButton !== undefined) {
                         if (
                             genUI.hangUpButton.disabled === false && genUI.transferButton.disabled === true && genUI.muteButton.disabled === true ||
@@ -2147,11 +2143,11 @@
                     console.error('CADEN LOG: dispoCall -', error);
                 }
             };
-        
+
             // postMessage Handler for messages from Salesforce
             window.addEventListener('message', function (event) {
                 if (event.origin !== 'https://thumbtack.lightning.force.com') return;
-        
+
                 // Check if the message is a string
                 if (typeof event.data === 'string' && event.data.includes("cadenMessage")) {
                     // Trim "cadenMessage " from the start of the message
@@ -2184,7 +2180,7 @@
                     if (onQueueStatus) {
                         var available = document.querySelector('a#AVAILABLE div.item-icon-wrapper')
                         available.click();
-        
+
                     } else if (availableStatus) {
                         var onQueue = document.querySelector('a#ON_QUEUE div.item-icon-wrapper')
                         onQueue.click();
@@ -2213,7 +2209,7 @@
                         updateCheckbox(value);
                     }
                 });
-        
+
                 // Function to update the checkbox based on remainOnCall value
                 function updateCheckbox(value) {
                     const checkbox = document.querySelector('input#autoDispoCheckbox');
@@ -2221,12 +2217,12 @@
                         checkbox.checked = (value === 'Yes');
                     }
                 }
-        
+
                 // create a click event listener for the checkbox. When clicked, if the check box is checked then set remainOnCall to 'Yes' but if it's not checked then set remainOnCall to 'No'
                 document.querySelector('input#autoDispoCheckbox').addEventListener('click', function () {
                     window.remainOnCall = this.checked ? 'Yes' : 'No';
                 });
-        
+
                 // Set the initial state of the checkbox
                 updateCheckbox(window.remainOnCall);
             };
@@ -2248,7 +2244,7 @@
                     margin: 0px !important;
                     background-color: rgb(23, 151, 192) !important;
                 }
-            
+
                 div.autoDispoContainer>label.autoDispoLabel {
                     display: flex !important;
                     flex-direction: row !important;
@@ -2260,7 +2256,7 @@
                     font-size: 10px !important;
                     font-weight: 500 !important;
                 }
-            
+
                 div.autoDispoContainer>input.autoDispoCheckbox {
                     display: flex !important;
                     flex-direction: row !important;
@@ -2273,7 +2269,7 @@
                 autoDispoElement.prepend(newStyles);
                 remainOnCallListener();
             };
-        
+
             (function () {
                 const checkbox = document.createElement('div');
                 checkbox.className = 'autoDispoContainer';
@@ -2289,7 +2285,7 @@
             })();
         */
         };
-        
+
         // Function to log a message after the DOM has had no mutations for 2 seconds
         function logAfterNoMutations() {
             let timeout = null;
@@ -2300,11 +2296,10 @@
                     genesysFunctions();
                 }, 1000);
             });
-        
+
             loadObserver.observe(document, { childList: true, subtree: true, attributes: true, characterData: true });
         }
-        
-        
+
         // Call the function when the userscript loads
         logAfterNoMutations();
     }
