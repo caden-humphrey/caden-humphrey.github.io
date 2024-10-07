@@ -2010,8 +2010,8 @@
                 // Function to pick up the call
                 function makeCall() {
                     wait(() => genUI.interactionsData?.textContent != '' && !genUI.interactionsData?.innerText.includes('DISCONNECTED') && genUI.pickUpButton?.disabled === false).then(() => {
-                        pauseForCondition(() => genUI.interactionsData?.textContent == 'CustomerALERTINGSMB English Dialer').then(() => {
-                            if (genUI.interactionsData?.textContent == 'CustomerALERTINGSMB English Dialer') {
+                        pauseForCondition(() => genUI.interactionsData?.textContent == 'CustomerALERTINGSMB English Dialer' || genUI.interactionsData?.textContent == 'CustomerALERTINGLarge Pro').then(() => {
+                            if (genUI.interactionsData?.textContent == 'CustomerALERTINGSMB English Dialer' || genUI.interactionsData?.textContent == 'CustomerALERTINGLarge Pro') {
                                 genUI.pickUpButton.click();
                                 wait(() => genUI.makeCallButton?.disabled === false).then(() => {
                                     genUI.makeCallButton?.click();
