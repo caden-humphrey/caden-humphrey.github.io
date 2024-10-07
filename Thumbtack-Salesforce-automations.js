@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Thumbtack-Salesforce-automations
 // @namespace    http://tampermonkey.net/
-// @version      v1.0
+// @version      10-01-2024
 // @description  Salesforce Automations
 // @author       Caden H
 // @match        https://thumbtack.lightning.force.com
@@ -1133,6 +1133,9 @@
         };
         window.formatCustomContact = function () {
             // use wait function to wait until testUiElements.every are defined then run the moveFields function
+            setTimeout(() => {
+                testUiElements.forEach(element => console.log(testUI[element]));
+            }, 6000);
             wait(() => testUiElements.every(element => testUI[element]?.innerText !== undefined)).then(() => {
                 if (!testUI.secondFlexipageComponenet?.innerText.includes('Pro Activation Detail')) {
                     window.moveFields();
