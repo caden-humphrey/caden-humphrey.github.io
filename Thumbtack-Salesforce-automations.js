@@ -1036,7 +1036,7 @@
         };
         window.testUI = new Proxy({}, { get: function (target, name) { return window.testUIvariables()[name]; } });
 
-        window.testUiElements = ['flexiComponentSlot', 'contactOutreachSummaryComponent', 'proActivationDetailComponent', 'column1', 'column2', 'column3', 'column4', 'defaultContactInfoFlexitab', 'highlightedFieldsSlot', 'contactInformationColumn1Slot', 'contactInformationColumn2Slot', 'parentAccount', 'occupation', 'firstServiceCreateTime', 'mailingAddress', 'name', 'accountName', 'adminLinkViewUser', 'thumbtackUserPk', 'occupation', 'assignedCategory', 'numberOfEmployees', 'decile', 'contactOwner', 'createdDate', 'signupDate', 'userLastActivity', 'preferredLanguage', 'CBSA', 'holdout', 'marketCompetitionDashboard', 'title', 'email', 'phone', 'preferredPhone', 'revenuePotential', 'businessType', 'lastQuoteTime', 'holdoutV1', 'holdoutSegmentationName'];
+        window.testUiElements = ['flexiComponentSlot', 'contactOutreachSummaryComponent', 'proActivationDetailComponent', 'column1', 'column2', 'column3', 'column4', 'defaultContactInfoFlexitab', 'highlightedFieldsSlot', 'contactInformationColumn1Slot', 'contactInformationColumn2Slot', 'parentAccount', 'occupation', 'firstServiceCreateTime', 'mailingAddress', 'name', 'accountName', 'adminLinkViewUser', 'thumbtackUserPk', 'occupation', 'assignedCategory', 'numberOfEmployees', 'decile', 'contactOwner', 'createdDate', 'signupDate', 'userLastActivity', 'preferredLanguage', 'CBSA', 'holdout', 'marketCompetitionDashboard', 'title', 'email', 'phone', 'preferredPhone', 'revenuePotential', 'businessType', 'lastQuoteTime'];
 
         window.moveFields = function () {
             testUI.column1.prepend(testUI.decile);
