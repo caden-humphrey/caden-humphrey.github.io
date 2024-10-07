@@ -1,3 +1,17 @@
+// ==UserScript==
+// @name         Thumbtack-Salesforce-automations
+// @namespace    http://tampermonkey.net/
+// @version      v1.0
+// @description  Salesforce Automations
+// @author       Caden H
+// @match        https://thumbtack.lightning.force.com
+// @match        https://thumbtack.lightning.force.com/*
+// @match        https://apps.usw2.pure.cloud/crm/index.html?*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
+// @grant        none
+// @updateURL    https://caden-humphrey.github.io/sales-smb-functions.js
+// @downloadURL  https://caden-humphrey.github.io/sales-smb-functions.js
+// ==/UserScript==
 (function () {
     if (window.top === window.self) {
         window.dblClick = new MouseEvent('dblclick', { bubbles: true, cancelable: true, view: window });
