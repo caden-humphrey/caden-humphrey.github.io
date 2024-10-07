@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Thumbtack-Salesforce-automations
 // @namespace    http://tampermonkey.net/
-// @version      10-01-2024
+// @version      10-02-2024
 // @description  Salesforce Automations
 // @author       Caden H
 // @match        https://thumbtack.lightning.force.com
