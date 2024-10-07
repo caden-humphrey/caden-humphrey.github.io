@@ -9,8 +9,8 @@
 // @match        https://apps.usw2.pure.cloud/crm/index.html?*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
 // @grant        none
-// @updateURL    https://caden-humphrey.github.io/sales-smb-functions.js
-// @downloadURL  https://caden-humphrey.github.io/sales-smb-functions.js
+// @updateURL    https://caden-humphrey.github.io/Thumbtack-Salesforce-automations.js
+// @downloadURL  https://caden-humphrey.github.io/Thumbtack-Salesforce-automations.js
 // ==/UserScript==
 (function () {
     if (window.top === window.self) {
